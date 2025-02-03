@@ -121,7 +121,9 @@ module Appraisal
     private
 
     def eval_gemfile_entry
-      @eval_gemfile.map { |(p, c)| "eval_gemfile(#{p.inspect}#{", #{c.inspect}" if c})" } * "\n\n"
+      @eval_gemfile.map do |(p, c)|
+        "eval_gemfile(#{p.inspect}#{", #{c.inspect}" if c})"
+      end * "\n\n"
     end
 
     alias_method :eval_gemfile_entry_for_dup, :eval_gemfile_entry
