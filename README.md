@@ -176,24 +176,6 @@ appraise 'ruby-3-4' do
 end
 ```
 
-**Appraisal.root.gemfile**
-```ruby
-source "https://rubygems.org"
-
-# Appraisal Root Gemfile is for running appraisal to generate the Appraisal Gemfiles
-# We do not load the standard Gemfile, as it is tailored for local development,
-#   while appraisals are tailored for CI.
-
-gemspec
-
-gem "appraisal"
-```
-
-Now when you need to update your appraisals:
-```shell
-BUNDLE_GEMFILE=Appraisal.root.gemfile bundle exec appraisal update
-```
-
 Removing Gems using Appraisal
 -------
 
