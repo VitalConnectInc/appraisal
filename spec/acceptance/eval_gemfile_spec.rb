@@ -27,7 +27,11 @@ RSpec.describe "eval_gemfile" do
   end
 
   def build_modular_gemfile
-    Dir.mkdir("tmp/stage/gemfiles") rescue nil
+    begin
+      Dir.mkdir("tmp/stage/gemfiles")
+    rescue StandardError
+      nil
+    end
 
     write_file File.join("gemfiles", "im_with_dummy"), <<-GEMFILE
       # No source needed because this is a modular gemfile intended to be loaded into another gemfile,
@@ -37,12 +41,13 @@ RSpec.describe "eval_gemfile" do
   end
 
   def build_appraisal_file
-    super <<-APPRAISALS
+    appraisals = <<-APPRAISALS
       appraise 'stock' do
         gem 'rake'
         eval_gemfile "im_with_dummy"
       end
     APPRAISALS
+    super(appraisals)
   end
 
   def build_rakefile
@@ -59,7 +64,11 @@ RSpec.describe "eval_gemfile" do
   end
 
   def build_gemspec(path = ".")
-    Dir.mkdir("tmp/stage/#{path}") rescue nil
+    begin
+      Dir.mkdir("tmp/stage/#{path}")
+    rescue StandardError
+      nil
+    end
 
     write_file File.join(path, "gemspec_project.gemspec"), <<-GEMSPEC
       Gem::Specification.new do |s|
