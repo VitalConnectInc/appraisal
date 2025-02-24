@@ -8,8 +8,6 @@ require "appraisal/gemfile"
 module Appraisal
   # Loads and parses Appraisals file
   class AppraisalFile
-    MODERN_DOUBLE_SPLAT = Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('3.0')
-
     attr_reader :appraisals, :gemfile
 
     def self.each(&block)
@@ -37,7 +35,7 @@ module Appraisal
     end
 
     def customize_gemfiles(&_block)
-      if MODERN_DOUBLE_SPLAT
+      if Appraisal::MODERN_DOUBLE_SPLAT
         Customize.new(**yield)
       else
         Customize.new(yield)
