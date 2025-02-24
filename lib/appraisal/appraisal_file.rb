@@ -35,7 +35,7 @@ module Appraisal
     end
 
     def customize_gemfiles(&_block)
-      if Appraisal::MODERN_DOUBLE_SPLAT
+      if ::Appraisal::MODERN_DOUBLE_SPLAT
         Customize.new(**yield)
       else
         Customize.new(yield)

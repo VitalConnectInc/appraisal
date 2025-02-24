@@ -8,8 +8,6 @@ require "fileutils"
 require "pathname"
 
 module Appraisal
-  MODERN_DOUBLE_SPLAT = Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('3.0')
-
   # Represents one appraisal and its dependencies
   class Appraisal
     DEFAULT_INSTALL_OPTIONS = {"jobs" => 1}.freeze
